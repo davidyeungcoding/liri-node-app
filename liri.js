@@ -3,13 +3,17 @@
 // ==================
 
 require('dotenv').config();
+var request = require('request');
+var twitter = require('twitter');
 
 // ===============
 // || VARIABLES ||
 // ===============
 
 var keys = require('./keys.js');
-var action = process.argv[3];
+var action = process.argv[2];
+var spotify = new spotify(keys.spotify);
+var client = new twitter(keys.twitter);
 
 // ===============
 // || FUNCTIONS ||
@@ -23,9 +27,19 @@ function spotify(keys) {
     this.keys = keys;
 };
 
-// function myTweets() {
-    
-// };
+function myTweets() {
+    var params = {
+        q: 'davidyeung20',
+        result_type: 'recent',
+        count: 20
+    };
+    client.get('search/tweets', params, function(error, tweets, response) {
+    // client.get('statuses/update', params, function(error, tweets, response) {
+        if (!error) {
+            console.log(tweets);
+        }
+    });
+};
 
 // function spotifyThisSong() {
 
@@ -43,9 +57,9 @@ function spotify(keys) {
 // || APPLICATOIN ||
 // =================
 
-// if (action === 'my-tweets') {
-//     myTweets();
-// }
+if (action === 'my-tweets') {
+    myTweets();
+}
 // else if (action === 'spotify-this-song') {
 //     spotifyThisSong();
 // }
@@ -57,8 +71,5 @@ function spotify(keys) {
 // }
 
 
-var spotify = new spotify(keys.spotify);
-var client = new twitter(keys.twitter);
-console.log(spotify);
-console.log(client);
+
 
