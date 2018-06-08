@@ -11,11 +11,17 @@ function spotifyThisSong(song) {
     }
     var params = {
         type: 'track',
-        query: song
+        query: song,
+        limit: 1
     };
     spotify.search(params, function(err, data) {
         if (!err) {
-            console.log(data);
+            // var jsonData = data.tracks.items[0];
+            // console.log(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(`Artist: ${data.tracks.items[0].album.artists[0].name}`, null, 2));
+            console.log(JSON.stringify(`Song: ${data.tracks.items[0].name}`, null, 2));
+            console.log(JSON.stringify(`Preview Link: ${data.tracks.items[0].album.external_urls.spotify}`, null, 2));
+            console.log(JSON.stringify(`Album: ${data.tracks.items[0].album.name}`, null, 2));
         }
     });
 };
