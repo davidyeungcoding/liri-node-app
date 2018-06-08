@@ -10,7 +10,7 @@ function myTweets() {
     };
     client.get('search/tweets', params, function(err, tweets, response) {
         if (!err) {
-            for (var i = 0; i < 21; i++) {
+            for (var i = 0; i < 20; i++) {
                 var tweetsData = tweets.statuses[i];
                 console.log(`Created at: ${tweetsData.created_at}`);
                 console.log(`Tweet: ${tweetsData.text}`);
