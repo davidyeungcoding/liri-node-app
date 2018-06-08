@@ -5,6 +5,7 @@
 require('dotenv').config();
 var request = require('request');
 var twitter = require('twitter');
+var spotify = require('node-spotify-api');
 
 // ===============
 // || VARIABLES ||
@@ -33,17 +34,30 @@ function myTweets() {
         result_type: 'recent',
         count: 20
     };
-    client.get('search/tweets', params, function(error, tweets, response) {
-    // client.get('statuses/update', params, function(error, tweets, response) {
-        if (!error) {
+    client.get('search/tweets', params, function(err, tweets, response) {
+        if (!err) {
             console.log(tweets);
         }
     });
 };
 
-// function spotifyThisSong() {
-
-// };
+function spotifyThisSong() {
+    if (process.argv.length > 3) {
+        var song = process.argv.slice(3).join('+');
+    }
+    else {
+        var song = 'the+sign';
+    }
+    var params = {
+        type: 'track',
+        query: song
+    };
+    spotify.search(params, function(err, data) {
+        if (!err) {
+            console.log(data);
+        }
+    })
+};
 
 // function movieThis() {
 
@@ -60,9 +74,9 @@ function myTweets() {
 if (action === 'my-tweets') {
     myTweets();
 }
-// else if (action === 'spotify-this-song') {
-//     spotifyThisSong();
-// }
+else if (action === 'spotify-this-song') {
+    spotifyThisSong();
+}
 // else if (action === 'movie-this') {
 //     movieThis();
 // }
