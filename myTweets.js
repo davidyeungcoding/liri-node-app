@@ -12,8 +12,9 @@ function myTweets() {
         if (!err) {
             for (var i = 0; i < 21; i++) {
                 var tweetsData = tweets.statuses[i];
-                console.log(tweetsData.created_at);
-                console.log(tweetsData.text);
+                console.log(`Created at: ${tweetsData.created_at}`);
+                console.log(`Tweet: ${tweetsData.text}`);
+                console.log('==========================================');
             }
         }
     });
