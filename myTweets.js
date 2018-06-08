@@ -10,7 +10,11 @@ function myTweets() {
     };
     client.get('search/tweets', params, function(err, tweets, response) {
         if (!err) {
-            console.log(tweets);
+            for (var i = 0; i < 21; i++) {
+                var tweetsData = tweets.statuses[i];
+                console.log(tweetsData.created_at);
+                console.log(tweetsData.text);
+            }
         }
     });
 };
